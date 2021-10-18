@@ -23,7 +23,7 @@ class Player
     end
 
     def attacks(other_player)
-        puts "Le joueur #{self.name} attaque le joueur #{other_player.name}"
+        puts "Le joueur #{name} attaque le joueur #{other_player.name}"
         damage = compute_damage
         puts "Il lui inflige #{damage} points de dommages"
         other_player.gets_damage(damage)
@@ -42,3 +42,32 @@ class Player
     end
 end
 
+
+class HumanPlayer < Player
+    attr_accessor :name, :life_points, :weapon_level
+
+    def initialize(name)
+        @name = name
+        @life_points = 100
+        @weapon_level = 3
+    end
+
+    def show_state
+        puts "#{@name} a #{@life_points} points de vie et une arme de niveau #{weapon_level}"
+    end
+
+    def compute_damage
+    rand(1..6) * @weapon_level
+    end
+
+    def search_weapon
+      new_weapon_level = rand(1..6)
+      puts "Tu as trouvé une arme de niveau #{new_weapon_level}"
+      if new_weapon_level > @weapon_level
+        @weapon_level = new_weapon_level
+        puts "Youhou ! elle est meilleure que ton arme actuelle : tu la prends."
+      else puts "M@*#$... elle n'est pas mieux que ton arme actuelle..."
+      end
+    end
+
+end
