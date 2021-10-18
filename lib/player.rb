@@ -1,3 +1,4 @@
+
 class Player
     attr_accessor :name, :life_points
 
@@ -17,14 +18,27 @@ class Player
         #Si le niveau de vie de l'objet est inférieur ou égal à zéro, le joueur est tué et on affiche un message.
         if @life_points <= 0
         puts "le joueur #{@name} a été tué !" # l'écriture #{} permet d'insérer une variable dans un string
+        puts "     (×_×#)   "
         end
     end
 
-    def attacks(player1, player2)
-        
+    def attacks(other_player)
+        puts "Le joueur #{self.name} attaque le joueur #{other_player.name}"
+        damage = compute_damage
+        puts "Il lui inflige #{damage} points de dommages"
+        other_player.gets_damage(damage)
     end
 
     def compute_damage
         return rand(1..6)
     end
+
+    def self.players_state(player1,player2)
+      puts ""
+      puts "Voici l'état de chaque joueur :"
+      print player1.show_state
+      print player2.show_state
+      puts ""
+    end
 end
+
